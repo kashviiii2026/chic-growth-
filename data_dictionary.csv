@@ -1,0 +1,50 @@
+file,column,data_type,definition,notes
+chic_media_instagram_posts.csv,account_id,string,Synthetic account identifier (ACC001–ACC041),Key; 41 accounts
+chic_media_instagram_posts.csv,industry,categorical,Business industry of the account (8 levels),Fixed per account
+chic_media_instagram_posts.csv,follower_count,integer,Simulated follower count at the time of posting,"Grows slowly per account over time; 1,500+ range"
+chic_media_instagram_posts.csv,account_age_months,integer,Simulated account age in months at posting date,"Starts 3–71, increments ~1 per 4 weeks"
+chic_media_instagram_posts.csv,post_id,string,"Unique post identifier (POST000001…), ordered by date/hour",Primary key
+chic_media_instagram_posts.csv,post_date,date (YYYY-MM-DD),Calendar date of publication,2025-11-03 to 2026-11-01
+chic_media_instagram_posts.csv,content_type,categorical,"Reel, Carousel or Image",
+chic_media_instagram_posts.csv,caption_length,integer,Caption length in characters,"10–2,200"
+chic_media_instagram_posts.csv,hashtag_count,integer,Number of hashtags used,0–30
+chic_media_instagram_posts.csv,posting_hour,integer,"Hour of day of publication (0–23, local account time)",
+chic_media_instagram_posts.csv,day_of_week,categorical,Day name derived from post_date,Monday–Sunday
+chic_media_instagram_posts.csv,posts_per_week,integer,Number of posts the account published in the Mon–Sun week containing the post,Same value for all posts of an account-week; 1–15. Weeks with zero posts have no rows
+chic_media_instagram_posts.csv,content_category,categorical,Thematic category of the post (industry-specific list),
+chic_media_instagram_posts.csv,reach,integer,Unique accounts reached,Post-publication outcome; do not use as a predictor in Experiment A
+chic_media_instagram_posts.csv,impressions,integer,Total views (>= reach),Post-publication outcome
+chic_media_instagram_posts.csv,likes,integer,Likes,Post-publication outcome
+chic_media_instagram_posts.csv,comments,integer,Comments,Post-publication outcome
+chic_media_instagram_posts.csv,shares,integer,Shares,Post-publication outcome
+chic_media_instagram_posts.csv,saves,integer,Saves,Post-publication outcome
+chic_media_instagram_posts.csv,profile_visits,integer,Profile visits attributed to the post,Post-publication outcome
+chic_media_instagram_posts.csv,follows_generated,integer,New follows attributed to the post,Post-publication outcome
+chic_media_instagram_posts.csv,engagement_rate,float (%),(likes+comments+shares+saves)/reach×100,Target for Experiment A; rounded to 4 dp
+chic_media_instagram_posts.csv,reach_rate,float (%),reach/follower_count×100,Can exceed 100 for viral posts; rounded to 4 dp
+chic_media_instagram_posts.csv,save_rate,float (%),saves/reach×100,Rounded to 4 dp
+chic_media_instagram_posts.csv,share_rate,float (%),shares/reach×100,Rounded to 4 dp
+chic_media_account_week.csv,account_id,string,Synthetic account identifier,Key (with week_start)
+chic_media_account_week.csv,industry,categorical,Business industry,
+chic_media_account_week.csv,week_start,date (YYYY-MM-DD),Monday of the week,Key (with account_id)
+chic_media_account_week.csv,follower_count,integer,Mean follower_count of the week's posts (rounded),
+chic_media_account_week.csv,account_age_months,integer,Account age in months during the week,
+chic_media_account_week.csv,posts_per_week,integer,Number of posts in the week,Primary predictor for Experiment B
+chic_media_account_week.csv,n_reels,integer,Reels published in the week,
+chic_media_account_week.csv,n_carousels,integer,Carousels published in the week,
+chic_media_account_week.csv,n_images,integer,Images published in the week,
+chic_media_account_week.csv,share_reels,float,n_reels/posts_per_week,Content-mix feature (0–1); shares sum to 1
+chic_media_account_week.csv,share_carousels,float,n_carousels/posts_per_week,Content-mix feature (0–1)
+chic_media_account_week.csv,share_images,float,n_images/posts_per_week,Content-mix feature (0–1)
+chic_media_account_week.csv,avg_caption_length,float,Mean caption length (chars),
+chic_media_account_week.csv,avg_hashtag_count,float,Mean hashtags per post,
+chic_media_account_week.csv,weekend_post_share,float,Share of the week's posts on Saturday/Sunday,0–1
+chic_media_account_week.csv,total_reach,integer,Sum of reach across the week's posts,Outcome
+chic_media_account_week.csv,avg_reach,float,Mean reach per post,Outcome
+chic_media_account_week.csv,total_engagements,integer,Sum of likes+comments+shares+saves,Outcome
+chic_media_account_week.csv,total_follows_generated,integer,Sum of follows_generated,Outcome
+chic_media_account_week.csv,avg_engagement_rate,float (%),Unweighted mean of post-level engagement_rate,Target for Experiment B
+chic_media_account_week.csv,weighted_engagement_rate,float (%),total_engagements/total_reach×100,Alternative target (reach-weighted)
+chic_media_account_week.csv,avg_reach_rate,float (%),Mean post-level reach_rate,Outcome
+chic_media_account_week.csv,avg_save_rate,float (%),Mean post-level save_rate,Outcome
+chic_media_account_week.csv,avg_share_rate,float (%),Mean post-level share_rate,Outcome
